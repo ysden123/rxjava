@@ -23,9 +23,11 @@ public class FlowableIntGenerator {
         return Flowable.create(emitter -> {
             for (int i = 1; i <= size; ++i) {
                 logger.debug("Emit for {} item", i);
-                emitter.onNext(random.nextInt());
+                if (!emitter.isCancelled())
+                    emitter.onNext(random.nextInt());
             }
-            emitter.onComplete();
+            if (!emitter.isCancelled())
+                emitter.onComplete();
         }, BackpressureStrategy.BUFFER);
     }
 
@@ -37,9 +39,11 @@ public class FlowableIntGenerator {
                         } catch (Exception ignore) {
                         }
                         logger.debug("Emit for {} item", i);
-                        emitter.onNext(random.nextInt());
+                        if (!emitter.isCancelled())
+                            emitter.onNext(random.nextInt());
                     }
-                    emitter.onComplete();
+                    if (!emitter.isCancelled())
+                        emitter.onComplete();
                 }).start(),
                 BackpressureStrategy.BUFFER);
     }

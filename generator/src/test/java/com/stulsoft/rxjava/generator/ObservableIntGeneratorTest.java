@@ -57,7 +57,6 @@ class ObservableIntGeneratorTest {
         observer.assertNoErrors();
         observer.assertValueCount(5);
         observer.dispose();
-
     }
 
     @Test
