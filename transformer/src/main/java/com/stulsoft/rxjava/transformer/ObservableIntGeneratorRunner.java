@@ -5,6 +5,7 @@
 package com.stulsoft.rxjava.transformer;
 
 import com.stulsoft.rxjava.generator.ObservableIntGenerator;
+import io.reactivex.Observable;
 import io.reactivex.Single;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +27,8 @@ public class ObservableIntGeneratorRunner {
                 .flatMapObservable(ObservableIntGenerator::generate)
                 .subscribe(
                         i -> logger.info("i = {}", i),
-                        error -> logger.error(error.getMessage()));
+                        error -> logger.error(error.getMessage()))
+                .dispose();
         logger.info("<==run");
     }
 
@@ -39,7 +41,8 @@ public class ObservableIntGeneratorRunner {
                 .doOnError(error -> logger.error("(2) {}", error.getMessage()))
                 .subscribe(
                         i -> logger.info("i = {}", i),
-                        error -> logger.error("(3) {}", error.getMessage()));
+                        error -> logger.error("(3) {}", error.getMessage()))
+                .dispose();
         logger.info("<==runWithError");
     }
 
@@ -49,6 +52,14 @@ public class ObservableIntGeneratorRunner {
 
     private Single<Integer> sizeError() {
         return Single.error(new RuntimeException("Test exception"));
+    }
+
+    private Single<Integer> plus2(Single<Integer> i){
+        return i.map(x->x + 2);
+    }
+
+    private Single<Integer> divide2(Single<Integer> i){
+        return i.map(x -> x / 2);
     }
 
     public static void main(String[] args) {
