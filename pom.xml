@@ -13,7 +13,9 @@
 
     <modules>
         <module>generator</module>
+        <module>transformer</module>
     </modules>
+	
     <properties>
         <java.version>11</java.version>
         <maven.compiler.source>11</maven.compiler.source>
