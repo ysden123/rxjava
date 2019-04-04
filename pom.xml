@@ -12,9 +12,10 @@
     <name>Playing with RxJava</name>
 
     <modules>
+        <module>basics</module>
+        <module>concurrency</module>
         <module>generator</module>
         <module>transformer</module>
-        <module>concurrency</module>
     </modules>
 	
     <properties>
