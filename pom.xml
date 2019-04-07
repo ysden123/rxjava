@@ -16,6 +16,7 @@
         <module>concurrency</module>
         <module>generator</module>
         <module>transformer</module>
+        <module>multiplicator</module>
     </modules>
 	
     <properties>
