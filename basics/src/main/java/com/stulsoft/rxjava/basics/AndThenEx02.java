@@ -11,16 +11,27 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Demonstrates usage the <i>andThen</i>
+ * Demonstrates usage the <i>andThen</i> with <i>defer</i>
  *
  * @author Yuriy Stul
  */
-public class AndThenEx01 {
-    private static final Logger logger = LoggerFactory.getLogger(AndThenEx01.class);
+public class AndThenEx02 {
+    private static final Logger logger = LoggerFactory.getLogger(AndThenEx02.class);
+
+
+    private void testBad() {
+        logger.info("==>testBad");
+        subscribe()
+                .subscribe(
+                        item -> logger.info("item: {}", item),
+                        error -> logger.error(error.getMessage())
+                );
+        logger.info("<==testBad");
+    }
 
     private void test1() {
         logger.info("==>test1");
-        subscribe()
+        subscribe1()
                 .subscribe(
                         item -> logger.info("item: {}", item),
                         error -> logger.error(error.getMessage())
@@ -46,6 +57,14 @@ public class AndThenEx01 {
         });
     }
 
+    private Completable handshakeWithError() {
+        logger.info("==>handshakeWithError");
+        return Completable.create(observer -> {
+            logger.info("Making handshake with error");
+            observer.onError(new RuntimeException("test exception"));
+        });
+    }
+
     private Flowable<String> subscription() {
         logger.info("==>subscription");
         return Flowable.fromArray("text1", "text2", "text3");
@@ -66,22 +85,20 @@ public class AndThenEx01 {
      *
      * @return stream with texts
      */
+    private Flowable<String> subscribe1() {
+        logger.info("==>subscribe1");
+        return handshake().andThen(Flowable.defer(this::subscription));
+    }
+
     private Flowable<String> subscribe2() {
         logger.info("==>subscribe2");
-        return Flowable.create(emitter ->
-                        handshake()
-                                .subscribe(() ->
-                                                subscription()
-                                                        .subscribe(emitter::onNext,
-                                                                emitter::onError),
-                                        emitter::onError),
-                BackpressureStrategy.BUFFER);
-
+        return handshakeWithError().andThen(Flowable.defer(this::subscription));
     }
 
     public static void main(String[] args) {
         logger.info("==>main");
-        var c = new AndThenEx01();
+        var c = new AndThenEx02();
+        c.testBad();
         c.test1();
         c.test2();
         logger.info("<==main");
