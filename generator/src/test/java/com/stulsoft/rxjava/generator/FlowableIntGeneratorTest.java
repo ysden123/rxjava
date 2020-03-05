@@ -4,7 +4,7 @@
 
 package com.stulsoft.rxjava.generator;
 
-import io.reactivex.subscribers.TestSubscriber;
+import io.reactivex.rxjava3.subscribers.TestSubscriber;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.TimeUnit;
@@ -36,7 +36,7 @@ class FlowableIntGeneratorTest {
         subscriber.assertNoErrors();
         subscriber.assertValueCount(5);
         subscriber.assertValueCount(5);
-        subscriber.dispose();
+        subscriber.cancel();
     }
 
     @Test
@@ -57,7 +57,7 @@ class FlowableIntGeneratorTest {
         subscriber.assertComplete();
         subscriber.assertNoErrors();
         subscriber.assertValueCount(5);
-        subscriber.dispose();
+        subscriber.cancel();
     }
 
     @Test
@@ -71,7 +71,7 @@ class FlowableIntGeneratorTest {
                 .doOnNext(i -> System.out.printf("i=%d%n", i))
                 .doOnComplete(() -> {
                     System.out.println("==>doOnComplete");
-                    subscriber.dispose();
+                    subscriber.cancel();
                 })
                 .subscribe(subscriber);
 
@@ -81,7 +81,7 @@ class FlowableIntGeneratorTest {
         subscriber.assertComplete();
         subscriber.assertNoErrors();
         subscriber.assertValueCount(5);
-        subscriber.dispose();
+        subscriber.cancel();
     }
 
     @Test
@@ -95,12 +95,12 @@ class FlowableIntGeneratorTest {
                 .doOnNext(i -> System.out.printf("i=%d%n", i))
                 .doOnComplete(() -> {
                     System.out.println("==>doOnComplete");
-                    subscriber.dispose();
+                    subscriber.cancel();
                 })
                 .subscribe(subscriber);
         try {
             Thread.sleep(600);
-            subscriber.dispose();
+            subscriber.cancel();
         } catch (Exception ignore) {
         }
 
@@ -110,6 +110,6 @@ class FlowableIntGeneratorTest {
         subscriber.assertNotComplete();
         subscriber.assertNoErrors();
         subscriber.assertValueCount(1);
-        subscriber.dispose();
+        subscriber.cancel();
     }
 }

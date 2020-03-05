@@ -4,7 +4,7 @@
 
 package com.stulsoft.rxjava.generator;
 
-import io.reactivex.Flowable;
+import io.reactivex.rxjava3.core.Flowable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

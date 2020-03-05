@@ -4,7 +4,7 @@
 
 package com.stulsoft.rxjava.basics;
 
-import io.reactivex.Completable;
+import io.reactivex.rxjava3.core.Completable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

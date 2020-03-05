@@ -5,8 +5,7 @@
 package com.stulsoft.rxjava.transformer;
 
 import com.stulsoft.rxjava.generator.ObservableIntGenerator;
-import io.reactivex.Observable;
-import io.reactivex.Single;
+import io.reactivex.rxjava3.core.Single;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -2,15 +2,14 @@
  * Copyright (c) 2019. Yuriy Stul
  */
 
-package com.stulsoft.rxjava.maybe; /**
- * @author Yuriy Stul
- */
+package com.stulsoft.rxjava.maybe;
 
-import io.reactivex.observers.TestObserver;
+import io.reactivex.rxjava3.observers.TestObserver;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * @author Yuriy Stul
+ */
 class MaybeEx1Test {
 
     @Test
@@ -44,7 +43,7 @@ class MaybeEx1Test {
     }
 
     @Test
-    void getWithError(){
+    void getWithError() {
         // given:
         var observer = new TestObserver<String>();
         var result = MaybeEx1.getWithError();
