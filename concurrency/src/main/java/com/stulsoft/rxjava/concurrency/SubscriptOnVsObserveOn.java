@@ -4,9 +4,9 @@
 
 package com.stulsoft.rxjava.concurrency;
 
-import io.reactivex.BackpressureStrategy;
-import io.reactivex.Flowable;
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.rxjava3.core.BackpressureStrategy;
+import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,7 +35,7 @@ public class SubscriptOnVsObserveOn {
         }, BackpressureStrategy.BUFFER);
     }
 
-    private void longConsumer(final String text, long interval) {
+    private void longConsumer(long interval) {
         try {
             Thread.sleep(interval);
         } catch (Exception ignore) {
@@ -50,7 +50,7 @@ public class SubscriptOnVsObserveOn {
     private void withoutConcurrency(int size, long interval) {
         var start = System.currentTimeMillis();
         longGenerator(size, interval)
-                .blockingSubscribe(item -> longConsumer(item, interval));
+                .blockingSubscribe(item -> longConsumer(interval));
         logger.info("withoutConcurrency:          duration = {} ms", System.currentTimeMillis() - start);
     }
 
@@ -65,7 +65,7 @@ public class SubscriptOnVsObserveOn {
         var start = System.currentTimeMillis();
         longGenerator(size, interval)
                 .subscribeOn(Schedulers.io())
-                .blockingSubscribe(item -> longConsumer(item, interval));
+                .blockingSubscribe(item -> longConsumer(interval));
         logger.info("withSubscribeOn:             duration = {} ms", System.currentTimeMillis() - start);
     }
 
@@ -81,7 +81,7 @@ public class SubscriptOnVsObserveOn {
         var start = System.currentTimeMillis();
         longGenerator(size, interval)
                 .observeOn(Schedulers.io())
-                .blockingSubscribe(item -> longConsumer(item, interval));
+                .blockingSubscribe(item -> longConsumer(interval));
         logger.info("withObserveOn:               duration = {} ms", System.currentTimeMillis() - start);
     }
 
@@ -97,7 +97,7 @@ public class SubscriptOnVsObserveOn {
         var start = System.currentTimeMillis();
         longGenerator(size, interval)
                 .observeOn(Schedulers.io())
-                .blockingSubscribe(item -> longConsumer(item, interval));
+                .blockingSubscribe(item -> longConsumer(interval));
         logger.info("withSubscribeOnAndObserveOn: duration = {} ms", System.currentTimeMillis() - start);
     }
 

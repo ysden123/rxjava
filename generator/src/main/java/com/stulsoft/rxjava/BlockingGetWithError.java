@@ -4,7 +4,7 @@
 
 package com.stulsoft.rxjava;
 
-import io.reactivex.Single;
+import io.reactivex.rxjava3.core.Single;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -4,7 +4,7 @@
 
 package com.stulsoft.rxjava.maybe;
 
-import io.reactivex.Maybe;
+import io.reactivex.rxjava3.core.Maybe;
 
 /**
  * @author Yuriy Stul

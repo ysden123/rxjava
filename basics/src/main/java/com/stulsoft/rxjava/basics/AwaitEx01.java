@@ -4,9 +4,9 @@
 
 package com.stulsoft.rxjava.basics;
 
-import io.reactivex.Single;
-import io.reactivex.observers.TestObserver;
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.observers.TestObserver;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

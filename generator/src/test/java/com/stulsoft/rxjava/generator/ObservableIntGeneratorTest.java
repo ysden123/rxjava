@@ -4,7 +4,7 @@
 
 package com.stulsoft.rxjava.generator;
 
-import io.reactivex.observers.TestObserver;
+import io.reactivex.rxjava3.observers.TestObserver;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.TimeUnit;
