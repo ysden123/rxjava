@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.stulsoft.rxjava.generator.FlowableIntGeneratorTest
--------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 12.44 s - in com.stulsoft.rxjava.generator.FlowableIntGeneratorTest
