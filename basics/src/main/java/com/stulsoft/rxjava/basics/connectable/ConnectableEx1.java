@@ -28,6 +28,8 @@ public class ConnectableEx1 {
     public static void main(String[] args) {
         logger.info("==>main");
         test1();
+        test2();
+        test3();
         logger.info("<==main");
     }
 
@@ -49,5 +51,47 @@ public class ConnectableEx1 {
 
         connectableSource.connect();
         logger.info("<==test1");
+    }
+
+    static void test2() {
+        logger.info("==>test2");
+        var connectableSource = Observable.just(
+                new TestObj("Alhpa").name,
+                new TestObj("Beta").name,
+                new TestObj("Gamma").name)
+                .publish();
+
+        connectableSource.doOnNext(s -> logger.info("doOnNext 1 {}", s));   // doesn't work!
+        connectableSource.doOnNext(s -> logger.info("doOnNext 2 {}", s));   // doesn't work!
+
+        connectableSource.subscribe();
+
+        connectableSource.connect();
+        logger.info("<==test2");
+    }
+
+    static void test3() {
+        logger.info("==>test3");
+        var connectableSource = Observable.just(
+                new TestObj("Alhpa").name,
+                new TestObj("Beta").name,
+                new TestObj("Gamma").name)
+                .publish();
+
+        connectableSource.doOnNext(s -> logger.info("doOnNext 1 {}", s));   // doesn't work!
+        connectableSource.doOnNext(s -> logger.info("doOnNext 2 {}", s));   // doesn't work!
+
+        connectableSource
+                .doOnNext(s -> logger.info("doOnNext 11 {}", s))    // does work!
+                .subscribe();
+
+        connectableSource
+                .doOnNext(s -> logger.info("doOnNext 21 {}", s))    // does work!
+                .subscribe();
+
+        logger.info("Before connect...");
+        connectableSource.connect();
+
+        logger.info("<==test3");
     }
 }
