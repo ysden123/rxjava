@@ -18,6 +18,9 @@ public class ConcatEx2 {
     private static final Logger logger = LoggerFactory.getLogger(ConcatEx2.class);
 
     Single<String> s1() {
+        logger.info("==>s1");
+        delay();
+        logger.info("After delay");
         return Single.timer(5, TimeUnit.SECONDS)
                 .map(l -> {
                     logger.info("Inside s1");
@@ -26,6 +29,9 @@ public class ConcatEx2 {
     }
 
     Single<String> s2() {
+        logger.info("==>s2");
+        delay();
+        logger.info("After delay");
         return Single.timer(1, TimeUnit.SECONDS)
                 .map(l -> {
                     logger.info("Inside s2");
@@ -35,6 +41,8 @@ public class ConcatEx2 {
 
     Single<String> longS() {
         logger.info("==>longS");
+        delay();
+        logger.info("After delay");
         return Single.timer(1, TimeUnit.HOURS)
                 .map(l -> {
                     logger.info("Inside longS");
@@ -161,6 +169,12 @@ public class ConcatEx2 {
             logger.error("(2) {}", err.getMessage());
         }
         logger.info("<==test4");
+    }
+
+    void delay() {
+        for (var i = 1; i <= 100000000; ++i) {
+            var tmp = Math.pow(123.456, (i < 50) ? i : 25);
+        }
     }
 
     public static void main(String[] args) {
