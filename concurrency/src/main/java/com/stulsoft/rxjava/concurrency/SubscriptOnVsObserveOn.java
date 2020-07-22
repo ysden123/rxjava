@@ -57,7 +57,7 @@ public class SubscriptOnVsObserveOn {
     private void withoutConcurrencyS(int size, long interval) {
         var start = System.currentTimeMillis();
         longGenerator(size, interval)
-                .blockingSubscribe(item -> shortConsumer(item));
+                .blockingSubscribe(this::shortConsumer);
         logger.info("withoutConcurrencyS:          duration = {} ms", System.currentTimeMillis() - start);
     }
 
@@ -73,7 +73,7 @@ public class SubscriptOnVsObserveOn {
         var start = System.currentTimeMillis();
         longGenerator(size, interval)
                 .subscribeOn(Schedulers.io())
-                .blockingSubscribe(item -> shortConsumer(item));
+                .blockingSubscribe(this::shortConsumer);
         logger.info("withSubscribeOnS:             duration = {} ms", System.currentTimeMillis() - start);
     }
 
@@ -89,7 +89,7 @@ public class SubscriptOnVsObserveOn {
         var start = System.currentTimeMillis();
         longGenerator(size, interval)
                 .observeOn(Schedulers.io())
-                .blockingSubscribe(item -> shortConsumer(item));
+                .blockingSubscribe(this::shortConsumer);
         logger.info("withObserveOnS:               duration = {} ms", System.currentTimeMillis() - start);
     }
 
@@ -105,7 +105,7 @@ public class SubscriptOnVsObserveOn {
         var start = System.currentTimeMillis();
         longGenerator(size, interval)
                 .observeOn(Schedulers.io())
-                .blockingSubscribe(item -> shortConsumer(item));
+                .blockingSubscribe(this::shortConsumer);
         logger.info("withSubscribeOnAndObserveOnS: duration = {} ms", System.currentTimeMillis() - start);
     }
 

@@ -41,7 +41,8 @@ public class Ch2_12 {
         logger.info("==>test2");
         Observable<String> source = Observable.just(
                 new TestObj("Alpha").name,
-                new TestObj("Beta").name, new TestObj("Gamma").name);
+                new TestObj("Beta").name,
+                new TestObj("Gamma").name);
 
         source.subscribe(s -> logger.info("Observer 1: " + s));
 

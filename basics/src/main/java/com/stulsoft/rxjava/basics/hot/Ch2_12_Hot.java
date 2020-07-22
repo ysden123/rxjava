@@ -38,7 +38,7 @@ public class Ch2_12_Hot {
     }
 
     static class TestObj {
-        private String name;
+        private final String name;
 
         public TestObj(String name) {
             this.name = name;
