@@ -1,2 +1,2 @@
 rootProject.name = "rxjava"
-include("basics", "concurrency", "generator", "multiplicator", "transformer")
+include("basics", "concurrency", "flow", "generator", "multiplicator", "transformer")

@@ -7,10 +7,10 @@ repositories {
     mavenCentral()
 }
 
-val rxJavaVersion = "3.0.4"
-val slf4jVersion = "1.7.30"
-val log4jSlf4jVersion = "2.13.3"
-val junitVersion = "5.6.2"
+val rxJavaVersion = "3.1.2"
+val slf4jVersion = "1.7.32"
+val log4jSlf4jVersion = "2.14.1"
+val junitVersion = "5.8.1"
 
 dependencies {
     implementation("io.reactivex.rxjava3:rxjava:$rxJavaVersion")
@@ -28,12 +28,12 @@ dependencies {
 
 tasks.compileJava {
     options.encoding = "UTF-8"
-    options.release.set(11)
+    options.release.set(17)
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 tasks.test {
@@ -41,4 +41,4 @@ tasks.test {
     useJUnitPlatform()
 }
 
-project.version = "2.0.0"
+project.version = "2.1.0"
