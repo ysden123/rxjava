@@ -36,12 +36,12 @@ public class Flow1 {
     private static void flow1(String text1) {
         logger.info("==>flow1. text1: {}", text1);
         var result1 = new AtomicReference<String>();
-        Service1.func1(text1)
+        Service.func1(text1)
                 .concatMap(response -> {
                     result1.set(response);
-                    return Service1.func2(response);
+                    return Service.func2(response);
                 })
-                .concatMap(response -> Service1.func3(result1.get(), response))
+                .concatMap(response -> Service.func3(result1.get(), response))
                 .subscribe(
                         response -> {
                             logger.info("result1: {}", result1.get());
@@ -55,12 +55,12 @@ public class Flow1 {
     private static void flow2(String text1) {
         logger.info("==>flow2. text1: {}", text1);
         var result1 = new AtomicReference<String>();
-        Service1.func1(text1)
+        Service.func1(text1)
                 .flatMap(response -> {
                     result1.set(response);
-                    return Service1.func2(response);
+                    return Service.func2(response);
                 })
-                .flatMap(response -> Service1.func3(result1.get(), response))
+                .flatMap(response -> Service.func3(result1.get(), response))
                 .subscribe(
                         response -> {
                             logger.info("result1: {}", result1.get());

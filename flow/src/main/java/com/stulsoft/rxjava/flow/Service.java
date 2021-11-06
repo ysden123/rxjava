@@ -11,16 +11,16 @@ import org.slf4j.LoggerFactory;
 /**
  * @author Yuriy Stul
  */
-public class Service1 {
-    private static final Logger logger = LoggerFactory.getLogger(Service1.class);
+public class Service {
+    private static final Logger logger = LoggerFactory.getLogger(Service.class);
 
-    private Service1() {
+    private Service() {
     }
 
     public static Single<String> func1(String text) {
         logger.info("==>func1");
         if (text == null)
-            return Single.error(new Exception("Service1::func1 -> text is null"));
+            return Single.error(new Exception("Service::func1 -> text is null"));
         else
             return Single.just(text + " is good");
     }
@@ -28,7 +28,7 @@ public class Service1 {
     public static Single<String> func2(String text) {
         logger.info("==>func2");
         if (text == null)
-            return Single.error(new Exception("Service1::func3 -> text is null"));
+            return Single.error(new Exception("Service::func3 -> text is null"));
         else
             return Single.just(text + " is used");
     }
